@@ -4,7 +4,7 @@ var thaiApp = angular.module('thaiApp', ['ngResource']);
 
 thaiApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider.
-    	when('/order/list', { templateUrl: 'partials/orderlist.html', controller: OrderListCtrl }).
+    	when('/order', { templateUrl: 'partials/orderlist.html', controller: OrderListCtrl }).
     	when('/order/:orderId', { templateUrl: 'partials/order.html', controller: OrderCtrl }).
     	when('/products', { templateUrl: 'partials/products.html', controller: ProductsCtrl }).
     	otherwise({redirectTo: '/order/list'});
@@ -40,10 +40,10 @@ thaiApp.factory('orderService', ['$resource', function($resource) {
 /* Controllers */
 
 function MainCtrl($scope, $location) {
-	$scope.nav =  [ { route : '/order/list', name : 'Order list' }, { route : '/products', name : 'Products' }];
+	$scope.nav =  [ { route : '/order', name : 'Order list' }, { route : '/products', name : 'Products' }];
 
 	$scope.isActive = function (entry) {
-        return entry.route === $location.path();
+        return $location.path().search(entry.route) >= 0;
     };
 }
 MainCtrl.$inject = ['$scope', '$location'];
