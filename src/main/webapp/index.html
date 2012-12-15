@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="de" data-ng-app="thaiApp">
+<head>
+  <meta charset="utf-8">
+  <title>Thai Order App</title>
+  <script>document.write("<base href=\"" + document.location + "\" />");</script>
+  <link rel="stylesheet" href="styles/vendor/bootstrap.css"/>
+  <link rel="stylesheet" href="styles/app.css"/>
+</head>
+<body>
+
+  <header id="overview">
+    <h1>Thai Order</h1>
+  </header>
+
+  <section id="main" data-ng-controller="MainCtrl">
+    <ul class="nav nav-tabs">
+      <li ng-repeat="entry in nav" ng-class="{active : isActive(entry)}"><a ng-href="{{ '#' + entry.route }}">{{ entry.name }}</a></li>
+    </ul>
+    <div data-ng-view></div>
+  </section>
+
+  <script src="scripts/vendor/angular.js"></script>
+  <script src="scripts/vendor/angular-resource.js"></script>
+  <script src="scripts/vendor/angular-locale_de-at.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+</html>
