@@ -7,12 +7,15 @@ import java.util.Calendar;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.derkoe.thaiorder.model.Order;
 import com.github.derkoe.thaiorder.service.OrderService;
 import com.github.derkoe.thaiorder.service.OrderService.OrderListDto;
@@ -21,6 +24,8 @@ import com.github.derkoe.thaiorder.service.OrderService.OrderListDto;
 @RequestMapping("/order")
 public class OrderController
 {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
+
     @Inject
     private OrderService orderService;
 
@@ -33,10 +38,19 @@ public class OrderController
 
     @RequestMapping(value = "{id}", method = POST)
     @ResponseBody
-    public Order update(@PathVariable("id") Integer id, @RequestBody String order)
+    public Order update(@PathVariable("id") Integer id, @RequestBody Order order)
     {
-        return orderService.get(id);
-//        return orderService.update(order.id, order.items, order.status);
+        try
+        {
+            ObjectMapper mapper = new ObjectMapper();
+            LOGGER.debug("Update order: {}", mapper.writeValueAsString(order));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return orderService.update(id, order.items, order.status);
     }
 
     @RequestMapping(method = GET)

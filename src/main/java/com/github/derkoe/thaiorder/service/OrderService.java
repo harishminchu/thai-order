@@ -5,6 +5,7 @@ import static com.github.derkoe.thaiorder.model.Order.OrderStatus.NEW;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -61,15 +62,17 @@ public class OrderService
     }
 
     @Transactional
-    public Order update(Integer orderId, List<OrderItem> items, OrderStatus status)
+    public Order update(Integer orderId, Set<OrderItem> items, OrderStatus status)
     {
-        Order order = orderRepository.findOne(orderId);
-        if(order.status != NEW)
+        Order order = orderRepository.findOneWithItems(orderId);
+        if (order.status != NEW)
         {
             throw new IllegalArgumentException("Order may only be changed in state NEW");
         }
-        order.items = items;
         order.status = status;
+
+        order = orderRepository.updateItems(order, items);
+
         return order;
     }
 }

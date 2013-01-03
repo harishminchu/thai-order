@@ -18,19 +18,19 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="position in order.positions">
-      <td>{{position.name}}</td>
-      <td>{{position.product.name}}</td>
-      <td>{{position.product.price | currency}}</td>
-      <td><input type="checkbox" ng-model="position.paid"></td>
-      <td><button class="btn btn-danger" ng-click="remove(position)">-</button></td>
+    <tr ng-repeat="item in order.items">
+      <td>{{item.name}}</td>
+      <td>{{item.product.name}}</td>
+      <td>{{item.product.price | currency}}</td>
+      <td><input type="checkbox" ng-model="item.paid" ng-change="paidChanged();"></td>
+      <td><button class="btn btn-danger" ng-click="remove($index)">-</button></td>
     </tr>
   </tbody>
   <tfoot>
     <tr>
       <td colspan="2">Sum / Sum paid</td>
-      <td>{{order.sum() | currency}}</td>
-      <td>{{order.sumPaid() | currency}}</td>
+      <td>{{sum(false) | currency}}</td>
+      <td>{{sum(true) | currency}}</td>
       <td></td>
     </tr>
   </tfoot>

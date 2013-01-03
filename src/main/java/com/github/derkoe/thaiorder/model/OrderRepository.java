@@ -1,6 +1,7 @@
 package com.github.derkoe.thaiorder.model;
 
 import java.util.Date;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -8,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrderRepository extends CrudRepository<Order, Integer>
+public interface OrderRepository extends CrudRepository<Order, Integer>, OrderRepositoryCustom
 {
     @Query("FROM Order WHERE day > :date")
     Iterable<Order> findAfter(@Param("date") Date date);
