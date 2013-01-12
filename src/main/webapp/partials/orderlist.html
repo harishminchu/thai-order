@@ -1,2 +1,23 @@
 <button class="btn btn-primary" ng-click="add()">New Order</button>
-<div ng-repeat="order in orderList"><a href="#/order/{{order.id}}">Order #{{order.id}} ({{order.day|date}})</a></div>
+
+<h3>Current orders</h3>
+<div ng-repeat="order in orderList | filter:{status:'NEW'}">
+	Order from {{order.day|date}} - 
+		<a href="#/order/{{order.id}}"><span ng-switch="order.status">
+			<span ng-switch-when="NEW">orders open</span>
+			<span ng-switch-when="ORDERED">already ordered (too late)</span>
+		</span></a>
+</div>
+
+<h3>Old orders</h3>
+<table class="table table-striped">
+	<tr><th>Date</th><th>Order</th></tr>
+	<tr ng-repeat="order in orderList | filter:{status:'CLOSED'}">
+		<td>
+			<a href="#/order/{{order.id}}">{{order.day|date}}</a>
+		</td>
+		<td>
+			<a href="#/order/{{order.id}}">Order #{{order.id}} ({{order.day|date}})</a>
+		</td>
+	</tr>
+</table>

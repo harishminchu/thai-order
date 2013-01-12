@@ -55,7 +55,7 @@ thaiApp.factory('orderService', [ '$resource', function($resource) {
 function MainCtrl($scope, $location) {
 	$scope.nav = [ {
 		route : '/order',
-		name : 'Order list'
+		name : 'Orders'
 	}, {
 		route : '/products',
 		name : 'Products'
