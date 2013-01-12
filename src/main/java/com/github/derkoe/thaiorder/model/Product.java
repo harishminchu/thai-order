@@ -13,6 +13,8 @@ import javax.persistence.Table;
 @Table(name = "products")
 public class Product implements Serializable
 {
+    private static final long serialVersionUID = -6801361353409503859L;
+
     @Id
     @GeneratedValue
     public Integer id;
@@ -23,6 +25,9 @@ public class Product implements Serializable
     @Column(length = 50, nullable = false)
     public String name;
 
+    @Column(length = 200)
+    public String description;
+
     @Column
     public BigDecimal price;
 
@@ -30,11 +35,12 @@ public class Product implements Serializable
     {
     }
 
-    public Product(Integer number, String name, BigDecimal price)
+    public Product(Integer number, String name, String description, BigDecimal price)
     {
         super();
         this.number = number;
         this.name = name;
+        this.description = description;
         this.price = price;
     }
 }

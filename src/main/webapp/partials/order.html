@@ -1,11 +1,9 @@
 <form name="addItemForm" class="form-inline" novalidate>
   <input type="text" name="name" id="nameField" class="input-mini" placeholder="Name" autofocus ng-model="name" ng-minlength="2" required>
-  <select name="product" ng-model="product" ng-options="p.number + ' - ' + p.name for p in products" required></select> {{product.price | currency}}
+  <select name="product" ng-model="product" ng-options="p.number + ' - ' + p.name + ' (' + p.description + ')' for p in products" required></select> {{product.price | currency}}
   <label class="checkbox"><input name="paid" type="checkbox" ng-model="paid"> Paid?</label>
   <button class="btn btn-primary" ng-click="add()" ng-disabled="addItemForm.$invalid">+</button>
 </form>
-
-<div>{{ order.id }}</div>
 
 <table class="table table-striped table-bordered">
   <thead>
@@ -20,7 +18,7 @@
   <tbody>
     <tr ng-repeat="item in order.items">
       <td>{{item.name}}</td>
-      <td>{{item.product.name}}</td>
+      <td><nobr>{{item.product.name}}</nobr> ({{item.product.description}})</td>
       <td>{{item.product.price | currency}}</td>
       <td><input type="checkbox" ng-model="item.paid" ng-change="paidChanged();"></td>
       <td><button class="btn btn-danger" ng-click="remove($index)">-</button></td>
