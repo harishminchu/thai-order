@@ -1,28 +1,37 @@
 <!doctype html>
 <html lang="de" data-ng-app="thaiApp">
 <head>
-  <meta charset="utf-8">
-  <title>Thai Order App</title>
-  <script>document.write("<base href=\"" + document.location + "\" />");</script>
-  <link rel="stylesheet" href="styles/vendor/bootstrap.css"/>
-  <link rel="stylesheet" href="styles/app.css"/>
+<meta charset="utf-8">
+<title>Thai Order App</title>
+<link rel="stylesheet" href="styles/vendor/bootstrap.css" />
+<link rel="stylesheet" href="styles/vendor/bootstrap-responsive.css" />
+<link rel="stylesheet" href="styles/app.css" />
 </head>
-<body>
+<body data-ng-controller="MainCtrl">
 
-  <header id="overview">
-    <h1>Thai Order</h1>
-  </header>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<span class="brand"><a href="#/">Thai Order <span class="beta">(Beta)</span></a></span>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li ng-repeat="entry in nav" ng-class="{active : isActive(entry)}"><a ng-href="{{ '#' + entry.route }}">{{
+								entry.name }}</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <section id="main" data-ng-controller="MainCtrl">
-    <ul class="nav nav-tabs">
-      <li ng-repeat="entry in nav" ng-class="{active : isActive(entry)}"><a ng-href="{{ '#' + entry.route }}">{{ entry.name }}</a></li>
-    </ul>
-    <div data-ng-view></div>
-  </section>
+	<div class="container top-container" data-ng-controller="MainCtrl">
+		<div data-ng-view></div>
+	</div>
 
-  <script src="scripts/vendor/angular.js"></script>
-  <script src="scripts/vendor/angular-resource.js"></script>
-  <script src="scripts/vendor/angular-locale_de-at.js"></script>
-  <script src="scripts/app.js"></script>
+	<script src="scripts/vendor/jquery.js"></script>
+	<script src="scripts/vendor/angular.js"></script>
+	<script src="scripts/vendor/angular-resource.js"></script>
+	<script src="scripts/vendor/angular-locale_de-at.js"></script>
+	<script src="scripts/vendor/bootstrap-dropdown.js"></script>
+	<script src="scripts/app.js"></script>
 </body>
 </html>

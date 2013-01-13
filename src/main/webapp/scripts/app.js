@@ -89,11 +89,12 @@ function OrderCtrl($scope, $routeParams, productService, orderService) {
 	$scope.order = orderService.get($routeParams.orderId);
 
 	$scope.sum = function(onlyPaid) {
-		var sum = 0;
-		var pos = $scope.order.items;
-		for ( var i = 0; i < pos.length; i++) {
-			if (!onlyPaid || pos[i].paid) {
-				sum += pos[i].product.price;
+		var sum = 0, pos = $scope.order.items;
+		if(pos) {
+			for ( var i = 0; i < pos.length; i++) {
+				if (!onlyPaid || pos[i].paid) {
+					sum += pos[i].product.price;
+				}
 			}
 		}
 		return sum;

@@ -1,3 +1,17 @@
+<h2>Order {{order.day|date}}
+<span class="btn-group">
+  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+    Action
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li><a data-ng-click="ordered()">Set status to ordered</a></li>
+    <li><a data-ng-click="delete()">Delete order</a></li>
+  </ul>
+</span>
+</h2>
+
+<h4>Add position</h4>
 <form name="addItemForm" class="form-inline" novalidate>
   <input type="text" name="name" id="nameField" class="input-mini" placeholder="Name" autofocus ng-model="name" ng-minlength="2" required>
   <select name="product" ng-model="product" ng-options="p.number + ' - ' + p.name + ' (' + p.description + ')' for p in products" required></select> {{product.price | currency}}

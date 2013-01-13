@@ -1,3 +1,6 @@
+body {
+  padding-top: 60px;
+}
 input.ng-invalid.ng-dirty {
   background-color: #FA787E;
 }

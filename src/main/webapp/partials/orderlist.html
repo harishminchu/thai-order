@@ -1,15 +1,18 @@
-<button class="btn btn-primary" ng-click="add()">New Order</button>
+<h2>Current Order</h2>
 
-<h3>Current orders</h3>
-<div ng-repeat="order in orderList | filter:{status:'NEW'}">
-	Order from {{order.day|date}} - 
-		<a href="#/order/{{order.id}}"><span ng-switch="order.status">
-			<span ng-switch-when="NEW">orders open</span>
+<button class="btn btn-primary" data-ng-click="add()" data-ng-hide="orderList.length > 0">New Order</button>
+
+<div ng-repeat="order in orderList | filter:{status:'NEW'||'ORDERED'}">
+	<h3>{{order.day|date}}
+		<span ng-switch="order.status">
+			<span ng-switch-when="NEW" class="badge badge-success">orders open</span>
 			<span ng-switch-when="ORDERED">already ordered (too late)</span>
-		</span></a>
+		</span>
+		<a href="#/order/{{order.id}}" class="btn btn-primary btn-small">Details</a>
+	</h3>
 </div>
 
-<h3>Old orders</h3>
+<h2>Old orders</h2>
 <table class="table table-striped">
 	<tr><th>Date</th><th>Order</th></tr>
 	<tr ng-repeat="order in orderList | filter:{status:'CLOSED'}">
