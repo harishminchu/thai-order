@@ -23,6 +23,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>No</th>
       <th>Meal</th>
       <th>Price</th>
       <th>Paid?</th>
@@ -32,6 +33,7 @@
   <tbody>
     <tr ng-repeat="item in order.items">
       <td>{{item.name}}</td>
+      <td>{{item.product.number}}</td>
       <td><nobr>{{item.product.name}}</nobr> ({{item.product.description}})</td>
       <td>{{item.product.price | currency}}</td>
       <td><input type="checkbox" ng-model="item.paid" ng-change="paidChanged();"></td>
@@ -40,7 +42,7 @@
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="2">Sum / Sum paid</td>
+      <td colspan="3">Sum / Sum paid</td>
       <td>{{sum(false) | currency}}</td>
       <td>{{sum(true) | currency}}</td>
       <td></td>
