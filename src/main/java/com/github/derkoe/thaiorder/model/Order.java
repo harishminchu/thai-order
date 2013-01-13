@@ -1,10 +1,8 @@
 package com.github.derkoe.thaiorder.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -24,6 +22,8 @@ import org.springframework.core.style.ToStringCreator;
 @Table(name = "orders")
 public class Order implements Serializable
 {
+    private static final long serialVersionUID = 4156441069873346213L;
+
     @Id
     @GeneratedValue
     public Integer id;

@@ -1,7 +1,6 @@
 package com.github.derkoe.thaiorder.model;
 
 import java.util.Date;
-import java.util.Set;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

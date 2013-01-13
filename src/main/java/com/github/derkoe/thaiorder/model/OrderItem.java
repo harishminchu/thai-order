@@ -16,6 +16,8 @@ import org.springframework.core.style.ToStringCreator;
 @Table(name = "order_items")
 public class OrderItem implements Serializable
 {
+    private static final long serialVersionUID = 8644435142602325064L;
+
     @Id
     @GeneratedValue
     public Integer id;
