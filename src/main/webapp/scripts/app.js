@@ -17,6 +17,21 @@ thaiApp.config([ '$routeProvider', '$locationProvider', function($routeProvider,
 	});
 } ]);
 
+thaiApp.directive('focusOn', function() {
+	return {
+		restrict : 'A',
+		link : function(scope, element, attrs) {
+			scope.$watch(attrs.focusOn, function(value) {
+				if (attrs.focusOn) {
+					window.setTimeout(function() {
+						element.focus();
+					}, 10);
+				}
+			}, true);
+		}
+	};
+});
+
 thaiApp.factory('productService', [ '$resource', function($resource) {
 	var Product = $resource('data/product/:productId', {
 		productId : '@id'
@@ -84,6 +99,8 @@ OrderListCtrl.$inject = [ '$scope', 'orderService', '$location' ];
 
 function OrderCtrl($scope, $routeParams, productService, orderService) {
 
+	$scope.refocus = true;
+
 	$scope.products = productService.getProducts();
 
 	$scope.order = orderService.get($routeParams.orderId);
@@ -111,7 +128,7 @@ function OrderCtrl($scope, $routeParams, productService, orderService) {
 		});
 		$scope.name = $scope.product = $scope.paid = null;
 		$scope.order.$save();
-		document.getElementById('nameField').focus(); // TODO move this into directive
+		$scope.refocus = true;
 	};
 
 	$scope.remove = function(index) {
@@ -121,6 +138,10 @@ function OrderCtrl($scope, $routeParams, productService, orderService) {
 
 	$scope.paidChanged = function() {
 		$scope.order.$save();
+	};
+
+	$scope.deleteOrder = function() {
+		$scope.order.$delete();
 	};
 
 }
