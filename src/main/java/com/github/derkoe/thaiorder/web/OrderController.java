@@ -1,5 +1,6 @@
 package com.github.derkoe.thaiorder.web;
 
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -67,5 +68,11 @@ public class OrderController
     public Order create()
     {
         return orderService.create();
+    }
+
+    @RequestMapping(value = "{id}", method = DELETE)
+    public void delete(@PathVariable("id") Integer id)
+    {
+        orderService.delete(id);
     }
 }

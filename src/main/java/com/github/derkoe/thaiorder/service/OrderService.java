@@ -75,4 +75,10 @@ public class OrderService
 
         return order;
     }
+
+    @Transactional
+    public void delete(Integer id)
+    {
+        orderRepository.delete(id);
+    }
 }
