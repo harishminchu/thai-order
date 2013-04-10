@@ -22,7 +22,6 @@
 	<servlet>
 		<servlet-name>data</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
 		<init-param>
 			<param-name>contextClass</param-name>
 			<param-value>
@@ -33,6 +32,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>com.github.derkoe.thaiorder.web.WebConfig</param-value>
 		</init-param>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>data</servlet-name>
