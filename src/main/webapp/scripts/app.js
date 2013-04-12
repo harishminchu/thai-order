@@ -102,16 +102,16 @@ thaiApp.controller('OrderCtrl', function($scope, $routeParams, productService, o
 
 	$scope.order = orderService.get($routeParams.orderId);
 
-	$scope.sum = function(onlyPaid) {
-		var sum = 0, pos = $scope.order.items;
-		if(pos) {
-			for ( var i = 0; i < pos.length; i++) {
-				if (!onlyPaid || pos[i].paid) {
-					sum += pos[i].product.price;
+	$scope.sum = function(items, onlyPaid) {
+		if (items) {
+			return items.reduce(function(sum, item) {
+				if (!onlyPaid || item.paid) {
+					return sum + item.product.price;
 				}
-			}
+				return sum;
+			}, 0);
 		}
-		return sum;
+		return 0;
 	};
 
 	$scope.add = function() {

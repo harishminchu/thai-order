@@ -43,8 +43,8 @@
   <tfoot>
     <tr>
       <td colspan="3">Sum / Sum paid</td>
-      <td>{{sum(false) | currency}}</td>
-      <td>{{sum(true) | currency}}</td>
+      <td>{{sum(order.items, false) | currency}}</td>
+      <td>{{sum(order.items, true) | currency}}</td>
       <td></td>
     </tr>
   </tfoot>
