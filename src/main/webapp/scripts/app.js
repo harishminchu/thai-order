@@ -1,3 +1,4 @@
+(function(angular) {
 'use strict';
 
 var thaiApp = angular.module('thaiApp', [ 'ngResource' ]);
@@ -5,17 +6,17 @@ var thaiApp = angular.module('thaiApp', [ 'ngResource' ]);
 thaiApp.config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$routeProvider.when('/order', {
 		templateUrl : 'partials/orderlist.html',
-		controller : OrderListCtrl
+		controller : 'OrderListCtrl'
 	}).when('/order/:orderId', {
 		templateUrl : 'partials/order.html',
-		controller : OrderCtrl
+		controller : 'OrderCtrl'
 	}).when('/products', {
 		templateUrl : 'partials/products.html',
-		controller : ProductsCtrl
+		controller : 'ProductsCtrl'
 	}).otherwise({
 		redirectTo : '/order'
 	});
-} ]);
+}]);
 
 thaiApp.directive('focusOn', function() {
 	return {
@@ -66,8 +67,7 @@ thaiApp.factory('orderService', [ '$resource', function($resource) {
 } ]);
 
 /* Controllers */
-
-function MainCtrl($scope, $location) {
+thaiApp.controller('MainCtrl', function($scope, $location) {
 	$scope.nav = [ {
 		route : '/order',
 		name : 'Orders'
@@ -79,25 +79,22 @@ function MainCtrl($scope, $location) {
 	$scope.isActive = function(entry) {
 		return $location.path().search(entry.route) >= 0;
 	};
-}
-MainCtrl.$inject = [ '$scope', '$location' ];
+});
 
-function ProductsCtrl($scope, productService) {
+thaiApp.controller('ProductsCtrl', function($scope, productService) {
 	$scope.products = productService.getProducts();
-}
-ProductsCtrl.$inject = [ '$scope', 'productService' ];
+});
 
-function OrderListCtrl($scope, orderService, $location) {
+thaiApp.controller('OrderListCtrl', function($scope, orderService, $location) {
 	$scope.orderList = orderService.list();
 	$scope.add = function() {
 		orderService.add(function(newOrder) {
 			$location.url('/order/' + newOrder.id);
 		});
 	};
-}
-OrderListCtrl.$inject = [ '$scope', 'orderService', '$location' ];
+});
 
-function OrderCtrl($scope, $routeParams, productService, orderService) {
+thaiApp.controller('OrderCtrl', function($scope, $routeParams, productService, orderService) {
 
 	$scope.refocus = true;
 
@@ -143,6 +140,5 @@ function OrderCtrl($scope, $routeParams, productService, orderService) {
 	$scope.deleteOrder = function() {
 		$scope.order.$delete();
 	};
-
-}
-OrderCtrl.$inject = [ '$scope', '$routeParams', 'productService', 'orderService' ];
+});
+}(angular));
